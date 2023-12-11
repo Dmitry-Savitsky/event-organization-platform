@@ -44,7 +44,7 @@ const Review = sequelize.define('Review', {
 const ClientAddress = sequelize.define('ClientAddress', {
     idClientAddress: { type: DataTypes.INTEGER, primaryKey: true },
     ClientAddress: { type: DataTypes.STRING(150), allowNull: false },
-    PrimaryClientAddress: { type: DataTypes.TINYINT, allowNull: true },
+    PrimaryClientAddress: { type: DataTypes.INTEGER, allowNull: true },
   });
   
 const OrdersHasExecutor = sequelize.define('OrdersHasExecutor', {
@@ -83,3 +83,14 @@ OrdersHasExecutor.belongsTo(Executor, { foreignKey: 'idExecutor' });
   
 Order.hasMany(OrdersHasExecutor, { foreignKey: 'idOrders' });
 Executor.hasMany(OrdersHasExecutor, { foreignKey: 'idExecutor' });
+
+module.exports = {
+ Client,
+ Company,
+ Executor,
+ Service,
+ Order,
+ Review,
+ ClientAddress,
+ OrdersHasExecutor
+}
