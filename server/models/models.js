@@ -6,6 +6,14 @@ const Client = sequelize.define('Client', {
     ClientName: { type: DataTypes.STRING, allowNull: false },
     ClientPhone: { type: DataTypes.STRING(45), allowNull: false },
   });
+
+const RegistrationData = sequelize.define('RegistrationData', {
+    idRegistrationData: { type: DataTypes.INTEGER, primaryKey: true },
+    Login: { type: DataTypes.STRING(45), allowNull: true },
+    Password: { type: DataTypes.STRING(45), allowNull: true },
+    Status: { type: DataTypes.INTEGER, allowNull: true },
+    idUser: { type: DataTypes.INTEGER, allowNull: true },
+  });
   
 const Company = sequelize.define('Company', {
     idcompany: { type: DataTypes.INTEGER, primaryKey: true },
