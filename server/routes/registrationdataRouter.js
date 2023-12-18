@@ -1,12 +1,12 @@
 const Router = require(`express`)
 const router = new Router
 
-const registrationdataController = require("../controllers/registrationdataController");
+const RegistrationDataController = require("../controllers/RegistrationDataController");
 //правильно ли?
-router.post('/registration', registrationdataController.registration);
+router.post('/registration', RegistrationDataController.registration);
 
-router.post('/login', registrationdataController.login);
+router.post('/login', RegistrationDataController.login);
 
-router.get('/auth', registrationdataController.check);
+router.get('/auth', RegistrationDataController.auth);
 
 module.exports = router

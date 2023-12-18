@@ -3,7 +3,11 @@ class ClientAddressController{
         
     }
 
-    async get(req, res) {
+    async getAll(req, res) {
+        
+    }
+
+    async getOne(req, res) {
         
     }
 

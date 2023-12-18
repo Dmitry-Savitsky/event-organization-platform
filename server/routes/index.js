@@ -1,5 +1,5 @@
 const Router = require(`express`)
-const router = new Router
+const router = new Router // создаем обьект роутера из экспресса
 
 const clientRouter = require(`./clientRouter`);
 const companyRouter = require(`./companyRouter`);
@@ -25,4 +25,4 @@ router.use(`/clientaddress`, clientAddressRouter)
 router.use(`/ordershasexecutor`, ordersHasExecutorRouter)
 router.use(`/registrationdata`, registrationDataRouter)
 
-module.exports = router
+module.exports = router 
