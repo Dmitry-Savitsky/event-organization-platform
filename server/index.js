@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(`/api`, router)
 
 //обработка ошибок = последний middleware
-app.use(errorHandler)
+app.use(errorHandler);
 
 
 

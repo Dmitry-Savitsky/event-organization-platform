@@ -10,13 +10,15 @@ class RegistrationDataController{
     }
 
     async auth(req, res, next) {
-        //res.json(`CHECK reg data controller test`)
-        const {id} = req.query
-        if(!id){
-           return next(ApiError.badRequest("id is not set"))
+        const { id } = req.query;
+    
+        if (!id) {
+            console.error("ID is not set");
+            return next(ApiError.badRequest(`id is not set`));
         }
-        res.json(id)
-        
+    
+        console.log("ID is set:", id)
+        res.json(id);
     }
 }
 
