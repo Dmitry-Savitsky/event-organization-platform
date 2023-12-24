@@ -1,14 +1,12 @@
 const Router = require(`express`)
 const router = new Router
 
-router.post('/', (req, res) => {
-});
+const ClientController = require("../controllers/ClientController");
 
-router.get('/auth', (req, res) => {
-    res.json({message: `client get router is working`})
-});
+router.post('/create', ClientController.create);
 
-router.delete('/:id', (req, res) => {
-});
+router.get('/get', ClientController.get);
+
+router.delete('/delete', ClientController.delete);
 
 module.exports = router

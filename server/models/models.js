@@ -8,7 +8,7 @@ const Client = sequelize.define('Client', {
   });
 
 const RegistrationData = sequelize.define('RegistrationData', {
-    idRegistrationData: { type: DataTypes.INTEGER, primaryKey: true },
+    idRegistrationData: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     Login: { type: DataTypes.STRING(45), allowNull: true },
     Password: { type: DataTypes.STRING(45), allowNull: true },
     Status: { type: DataTypes.INTEGER, allowNull: true },
@@ -16,7 +16,7 @@ const RegistrationData = sequelize.define('RegistrationData', {
   });
   
 const Company = sequelize.define('Company', {
-    idcompany: { type: DataTypes.INTEGER, primaryKey: true },
+    idCompany: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     CompanyName: { type: DataTypes.STRING(45), allowNull: true },
     CompanyPhone: { type: DataTypes.STRING(15), allowNull: true },
     CompanyAddress: { type: DataTypes.STRING(150), allowNull: true },
@@ -29,9 +29,9 @@ const Executor = sequelize.define('Executor', {
   });
   
 const Service = sequelize.define('Service', {
-    idservice: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    servicename: { type: DataTypes.STRING, allowNull: false },
-    servicetype: { type: DataTypes.INTEGER, allowNull: false },
+    idService: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    ServiceName: { type: DataTypes.STRING, allowNull: false },
+    ServiceType: { type: DataTypes.INTEGER, allowNull: false },
     ServicePrice: { type: DataTypes.INTEGER, allowNull: true },
   });
   
@@ -50,7 +50,7 @@ const Review = sequelize.define('Review', {
   });
   
 const ClientAddress = sequelize.define('ClientAddress', {
-    idClientAddress: { type: DataTypes.INTEGER, primaryKey: true },
+    idClientAddress: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     ClientAddress: { type: DataTypes.STRING(150), allowNull: false },
     PrimaryClientAddress: { type: DataTypes.INTEGER, allowNull: true },
   });
@@ -100,5 +100,6 @@ module.exports = {
  Order,
  Review,
  ClientAddress,
- OrdersHasExecutor
+ OrdersHasExecutor,
+ RegistrationData
 }

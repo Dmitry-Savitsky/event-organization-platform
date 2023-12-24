@@ -1,13 +1,12 @@
 const Router = require(`express`)
 const router = new Router
 
-router.post('/', (req, res) => {
-});
+const OrderHasExecutorController = require("../controllers/ordersHasExecutorController");
 
-router.get('/', (req, res) => {
-});
+router.post('/create', OrderHasExecutorController.create);
 
-router.delete('/', (req, res) => {
-});
+router.get('/get', OrderHasExecutorController.get);
+
+router.delete('/delete', OrderHasExecutorController.delete);
 
 module.exports = router

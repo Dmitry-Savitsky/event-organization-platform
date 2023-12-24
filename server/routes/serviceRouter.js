@@ -1,13 +1,12 @@
 const Router = require(`express`)
 const router = new Router
 
-router.post('/', (req, res) => {
-});
+const ServiceController = require("../controllers/serviceController");
 
-router.get('/', (req, res) => {
-});
+router.post('/create', ServiceController.create);
 
-router.delete('/:id', (req, res) => {
-});
+router.get('/get', ServiceController.get);
+
+router.delete('/delete', ServiceController.delete);
 
 module.exports = router

@@ -1,13 +1,12 @@
 const Router = require(`express`)
 const router = new Router
 
-router.post('/', (req, res) => {
-});
+const ReviewController = require("../controllers/reviewController");
 
-router.get('/', (req, res) => {
-});
+router.post('/create', ReviewController.create);
 
-router.delete('/:id', (req, res) => {
-});
+router.get('/get', ReviewController.get);
+
+router.delete('/delete', ReviewController.delete);
 
 module.exports = router

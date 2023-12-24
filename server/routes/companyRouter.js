@@ -1,13 +1,12 @@
 const Router = require(`express`)
 const router = new Router
 
-router.post('/', (req, res) => {
-});
+const companyController = require("../controllers/companyController");
 
-router.get('/', (req, res) => {
-});
+router.post('/', companyController.create);
 
-router.delete('/:id', (req, res) => {
-});
+router.get('/', companyController.getAll);
+
+router.delete('/', companyController.delete);
 
 module.exports = router

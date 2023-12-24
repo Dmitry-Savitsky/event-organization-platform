@@ -1,13 +1,13 @@
 class OrdersHasExecutorController{
-    async registration(req, res) {
+    async create(req, res) {
         
     }
 
-    async login(req, res) {
+    async get(req, res) {
         
     }
 
-    async check(req, res) {
+    async delete(req, res) {
         
     }
 }

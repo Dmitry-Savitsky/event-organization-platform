@@ -7,8 +7,6 @@ router.post('/create', ClientAddressController.create);
 
 router.get('/get', ClientAddressController.getAll);
 
-router.get('/get', ClientAddressController.getOne);
-
 router.delete('/delete', ClientAddressController.delete);
 
 module.exports = router
