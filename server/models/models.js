@@ -57,6 +57,7 @@ const ClientAddress = sequelize.define('ClientAddress', {
   
 const OrdersHasExecutor = sequelize.define('OrdersHasExecutor', {
     // Assuming `idOrders` and `idExecutor` are both INTEGER
+    idOrdersHasExecutor: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     idOrders: { type: DataTypes.INTEGER, primaryKey: true },
     idExecutor: { type: DataTypes.INTEGER, primaryKey: true },
   });

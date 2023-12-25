@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "express-fileupload": "^1.4.3",
+    "uuid": "^9.0.1"
+  }
+}

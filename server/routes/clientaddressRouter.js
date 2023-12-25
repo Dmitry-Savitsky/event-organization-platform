@@ -3,7 +3,7 @@ const router = new Router
 
 const ClientAddressController = require("../controllers/ClientAddressController");
 
-router.post('/create', ClientAddressController.create);
+router.post('/', ClientAddressController.create);
 
 router.get('/get', ClientAddressController.getAll);
 

@@ -3,9 +3,9 @@ const router = new Router
 
 const ClientController = require("../controllers/ClientController");
 
-router.post('/create', ClientController.create);
+router.post('/', ClientController.create);
 
-router.get('/get', ClientController.get);
+router.get('/get', ClientController.getAll);
 
 router.delete('/delete', ClientController.delete);
 
