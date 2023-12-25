@@ -5,7 +5,7 @@ const ClientAddressController = require("../controllers/ClientAddressController"
 
 router.post('/', ClientAddressController.create);
 
-router.get('/get', ClientAddressController.getAll);
+router.get('/', ClientAddressController.getAll);
 
 router.delete('/delete', ClientAddressController.delete);
 

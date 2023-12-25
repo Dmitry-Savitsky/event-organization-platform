@@ -16,7 +16,16 @@ class ClientAddressController {
     }
   
     async getAll(req, res) {
-      
+      const{idClient} = req.body
+      let addresses;
+
+      if(!idClient){
+        addresses = await ClientAddressModel.findAll()
+      }
+      if(idClient){
+        addresses = await ClientAddressModel.findAll({where: {idClient}})
+      }
+      return res.json({ addresses });
     }
   
     async getOne(req, res) {
