@@ -9,7 +9,7 @@ const orderRouter = require(`./orderRouter`);
 const reviewRouter = require(`./reviewRouter`);
 const clientAddressRouter = require(`./clientAddressRouter`);
 const ordersHasExecutorRouter = require(`./ordersHasExecutorRouter`);
-const registrationDataRouter = require(`./registrationdataRouter`);
+const registrationDataRouter = require(`./registrationDataRouter`);
 
 //RegistrationData
 //registrationDataRouter
