@@ -103,7 +103,7 @@ class RegistrationDataController {
       }
 
       // Генерация JWT токена
-      const token = generateJwt(user.idRegistrationData);
+      const token = generateJwt(user.idRegistrationData, user.idUser);
 
       res.status(200).json({ token });
 

@@ -1,87 +1,37 @@
-// import { $authHost, $host } from ".";
-// import { jwtDecode } from "jwt-decode";
+import { $authHost, $host } from ".";
+import { jwtDecode } from "jwt-decode";
 
-// export const registration = async (login, password, status, clientName, clientPhone, companyName, companyPhone, companyAddress) => {
-//     try {
-//         const { data } = await $host.post("/registration", {
-//             login,
-//             password,
-//             status,
-//             clientName,
-//             clientPhone,
-//             companyName,
-//             companyPhone,
-//             companyAddress,
-//         });
+export const registration = async (email, password, first_name, last_name, phone_number) => {
+    const { data } = await $host.post("api/users/signup", { role: 'client', first_name, last_name, password, email, phone_number })
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('isAuth', true)
+    return jwtDecode(data.token)
+}
 
-//         localStorage.setItem('token', data.token);
-//         localStorage.setItem('isAuth', true);
+export const login = async (email, password) => {
+    const { data } = await $host.post("api/users/login", { email, password })
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('isAuth', true)
+    return jwtDecode(data.token)
+}
 
-//         return jwtDecode(data.token);
-//     } catch (error) {
-//         // Handle registration error
-//         console.error('Registration error:', error);
-//         throw error;
-//     }
-// };
+export const check = async () => {
+    const response = await $authHost.post('api/users/check')
+    localStorage.setItem('token', response.data)
+    return response
+}
 
-// export const login = async (login, password) => {
-//     try {
-//         const { data } = await $host.post("/login", { login, password });
+export const getAllUserFeedbacks = async (id) => {
+    const {data} = await $authHost.get('api/feedbacks/all/user/' + id)
+    return data
+}
 
-//         localStorage.setItem('token', data.token);
-//         localStorage.setItem('isAuth', true);
+export const deleteOneFeedback = async (id) => {
+    const {data} = await $authHost.delete('api/feedbacks/' + id)
+    return data
+}
 
-//         return jwtDecode(data.token);
-//     } catch (error) {
-//         // Handle login error
-//         console.error('Login error:', error);
-//         throw error;
-//     }
-// };
-
-// export const check = async () => {
-//     try {
-//         const response = await $authHost.get('/auth');
-
-//         localStorage.setItem('token', response.data);
-//         return response;
-//     } catch (error) {
-//         // Handle check error
-//         console.error('Check error:', error);
-//         throw error;
-//     }
-// };
-
-// export const getAllUserFeedbacks = async (id) => {
-//     try {
-//         const { data } = await $authHost.get(`/feedbacks/all/user/${id}`);
-//         return data;
-//     } catch (error) {
-//         // Handle error
-//         console.error('Error getting user feedbacks:', error);
-//         throw error;
-//     }
-// };
-
-// export const deleteOneFeedback = async (id) => {
-//     try {
-//         const { data } = await $authHost.delete(`/feedbacks/${id}`);
-//         return data;
-//     } catch (error) {
-//         // Handle error
-//         console.error('Error deleting feedback:', error);
-//         throw error;
-//     }
-// };
-
-// export const getUserInfo = async (id) => {
-//     try {
-//         const { data } = await $authHost.get(`/clients/${id}`);
-//         return data;
-//     } catch (error) {
-//         // Handle error
-//         console.error('Error getting user info:', error);
-//         throw error;
-//     }
-// };
+export const getUserInfo = async (id) => {
+    const {data} = await $authHost.get('api/clients/' + id)
+    return data
+}
