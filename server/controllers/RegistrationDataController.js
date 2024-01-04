@@ -116,7 +116,7 @@ class RegistrationDataController {
 
   }
 
-  async auth(req, res, next) {
+  async check(req, res, next) {
     const token = generateJwt()
     res.json({message: "its works"})
     // ! ОЗАРЕНИЕ !

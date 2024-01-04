@@ -6,11 +6,13 @@ import Auth from "./pages/Auth";
 import {
   CLIENT_ROUTE,
   COMPANY_ROUTE,
+  FAQ_ROUTE,
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,
   SERVICES_ROUTE,
   SERVICE_ROUTE,
 } from "./utils/consts";
+import FAQ from "./pages/FAQ";
 
 export const authRoutes = [
   {
@@ -40,4 +42,8 @@ export const publicRoutes = [
     path: REGISTRATION_ROUTE,
     Component: Auth,
   },
+  {
+    path: FAQ_ROUTE,
+    Component: FAQ,
+  }
 ];
