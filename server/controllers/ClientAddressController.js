@@ -29,8 +29,27 @@ class ClientAddressController {
     }
   
     async getOne(req, res) {
-      // Реализация получения одной записи
+      try {
+        const { idClientAddress } = req.params; // Assuming idClientAddress is passed as a route parameter
+        if (!idClientAddress) {
+          return res.status(400).json({ error: "idClientAddress is required" });
+        }
+    
+        const address = await ClientAddressModel.findOne({
+          where: { idClientAddress },
+        });
+    
+        if (!address) {
+          return res.status(404).json({ error: "Address not found" });
+        }
+    
+        return res.json({ address });
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
     }
+    
   
     async delete(req, res) {
       // Реализация удаления записи

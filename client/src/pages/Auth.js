@@ -12,23 +12,26 @@ import { LOGIN_ROUTE, SERVICES_ROUTE, REGISTRATION_ROUTE } from '../utils/consts
 import { toast, ToastContainer } from 'react-toastify';
 
 const Auth = () => {
+  
   const location = useLocation()
   const isLogin = location.pathname === LOGIN_ROUTE
   const { user } = useContext(Context)
   const navigate = useNavigate()
   const target = useRef(null);
 
-  const [email, setEmail] = useState('')
+  const [user_login, setLogin] = useState('')
   const [password, setPassword] = useState('')
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [name, setName] = useState('');
+  const status = 1;
+  // const [status, setStatus] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const [show, setShow] = React.useState(false);
 
   const click = async () => {
+    console.log('Button clicked');
     try {
-      if (!email || !password || (!isLogin && (!firstName || !lastName || !phoneNumber))) {
+      if (!user_login || !password || (!isLogin && (!name || !status || !phoneNumber))) {
         toast.error('Please enter all required information', {
           position: "top-center",
           autoClose: 2000,
@@ -42,9 +45,9 @@ const Auth = () => {
 
       let data;
       if (isLogin) {
-        data = await login(email, password);
+        data = await login(user_login, password);
       } else {
-        data = await registration(email, password, firstName, lastName, phoneNumber);
+        data = await registration(user_login, password, status, name, phoneNumber);
       }
       localStorage.setItem('isAuth', 'true');
       user.setUser(data);
@@ -85,8 +88,8 @@ const Auth = () => {
                 className="mb-2"
                 id="email"
                 type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                value={user_login}
+                onChange={e => setLogin(e.target.value)}
                 placeholder="Email"
               />
               <Form.Control
@@ -103,18 +106,18 @@ const Auth = () => {
                     className="mb-2"
                     id="first_name"
                     type="text"
-                    value={firstName}
-                    onChange={e => setFirstName(e.target.value)}
+                    value={name}
+                    onChange={e => setName(e.target.value)}
                     placeholder="Имя"
                   />
-                  <Form.Control
+                  {/* <Form.Control
                     className="mb-2"
-                    id="last_name"
-                    type="text"
-                    value={lastName}
-                    onChange={e => setLastName(e.target.value)}
-                    placeholder="Фамилия"
-                  />
+                    id="status"
+                    type="nubmer?"
+                    value={status}
+                    onChange={e => setStatus(e.target.value)}
+                    placeholder="Статус"
+                  /> */}
                   <Form.Control
                     className="mb-2"
                     id="phone_number"

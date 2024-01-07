@@ -1,7 +1,7 @@
 const Router = require(`express`)
 const router = new Router
 
-const ServiceController = require("../controllers/serviceController");
+const ServiceController = require("../controllers/ServiceController");
 
 router.post('/create', ServiceController.create);
 

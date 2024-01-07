@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useContext } from "react"
 import { Context } from ".."
-import { COMPANY_ROUTE, SERVICES_ROUTE, FAQ_ROUTE, LOGIN_ROUTE } from '../utils/consts';
+import { COMPANY_ROUTE, SERVICES_ROUTE, FAQ_ROUTE, LOGIN_ROUTE, MAIN_ROUTE } from '../utils/consts';
 import { CLIENT_ROUTE } from '../utils/consts';
 import { NavLink } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
@@ -21,13 +21,13 @@ const NavBar = observer(() => {
 
     const token = localStorage.getItem('token');
     const decodedToken = token ? jwtDecode(token) : null;
-    const isOrganizer = decodedToken && decodedToken.role === 'organizer';
+    const isCompany = decodedToken && decodedToken.status === 2;
 
     const logout = () => {
         user.setUser({})
         user.setIsAuth(false)
         localStorage.clear()
-        navigate(SERVICES_ROUTE)
+        navigate(MAIN_ROUTE)
     }
 
     return (
@@ -37,13 +37,13 @@ const NavBar = observer(() => {
                     style={{
                         fontSize: "20px", color: "white", textDecoration: "none"
                     }}
-                    to={SERVICES_ROUTE}
+                    to={MAIN_ROUTE}
                 >
                     Events-org
                 </NavLink>
                 {localStorage.getItem('isAuth') ?
                     <Nav className="ml-auto">
-                        {isOrganizer &&
+                        {isCompany &&
                             <Button
                                 className="me-2"
                                 style={{ color: "white" }}

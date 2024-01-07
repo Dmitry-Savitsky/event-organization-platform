@@ -19,7 +19,6 @@ const Company = sequelize.define('Company', {
     idCompany: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     CompanyName: { type: DataTypes.STRING(45), allowNull: true },
     CompanyPhone: { type: DataTypes.STRING(15), allowNull: true },
-    CompanyAddress: { type: DataTypes.STRING(150), allowNull: true },
   });
   
 const Executor = sequelize.define('Executor', {
@@ -31,8 +30,11 @@ const Executor = sequelize.define('Executor', {
 const Service = sequelize.define('Service', {
     idService: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     ServiceName: { type: DataTypes.STRING, allowNull: false },
-    ServiceType: { type: DataTypes.INTEGER, allowNull: false },
+    ServiceType: { type: DataTypes.STRING(150), allowNull: false },
     ServicePrice: { type: DataTypes.INTEGER, allowNull: true },
+    img: {
+      type: DataTypes.STRING(255),
+    }
   });
   
 const Order = sequelize.define('Order', {

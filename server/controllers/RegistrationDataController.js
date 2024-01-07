@@ -4,19 +4,24 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { Client, RegistrationData, Company } = require('../models/models')
 
-const generateJwt = (userId) => {
-  const secretKey = 'your_secret_key'; // Замените на свой секретный ключ
-  const token = jwt.sign({ userId }, secretKey, { expiresIn: '24h' });
-  return token;
-};
-
-
+const generateJwt = (idRegistrationData, Status, idUser) => {
+    return jwt.sign(
+        {
+            idreg: idRegistrationData,
+            status: Status,
+            userid: idUser
+        },
+        process.env.SECRET_KEY,
+        {
+            expiresIn: '12h'
+        }
+    );
+}
 
 class RegistrationDataController {
-  async registration(req, res) {
-    const t = await sequelize.transaction();
+  async registration(req, res, next) {
     try {
-      const { login, password, status, clientName, clientPhone, companyName, companyPhone, companyAddress } = req.body;
+      const { login, password, status, clientName, clientPhone, companyName, companyPhone} = req.body;
 
       if (!login || !password || !status) {
         return next(ApiError.badRequest(`Incorrect input...`));
@@ -47,7 +52,6 @@ class RegistrationDataController {
           {
             CompanyName: companyName,
             CompanyPhone: companyPhone,
-            CompanyAddress: companyAddress,
           }
         );
         TablePK = user.idCompany;
@@ -69,14 +73,15 @@ class RegistrationDataController {
         }
       );
 
-      // Генерация JWT токена
-      const token = generateJwt(registrationData.idRegistrationData);
+      console.log(registrationData);
 
+      // Генерация JWT токена
+      const token = generateJwt(registrationData.idRegistrationData, status, TablePK);
 
       res.status(200).json({ token });
 
     } catch (error) {
-      console.error('Registration error:', error);
+      res.status(500).json({ error });
     }
   }
 
@@ -103,7 +108,7 @@ class RegistrationDataController {
       }
 
       // Генерация JWT токена
-      const token = generateJwt(user.idRegistrationData, user.idUser);
+      const token = generateJwt(user.idRegistrationData, user.Status, user.idUser);
 
       res.status(200).json({ token });
 
@@ -113,15 +118,8 @@ class RegistrationDataController {
   }
 
   async check(req, res, next) {
-
-  }
-
-  async check(req, res, next) {
-    const token = generateJwt()
-    res.json({message: "its works"})
-    // ! ОЗАРЕНИЕ !
-    // в логине токенезировать idUser 
-    // тут получить idClient/idCompany по idUser и токенезировать все данные из таблицы Client/Company
+    const token = generateJwt(req.user.id, req.user.role)
+    return res.json({token})
   }
 }
 
