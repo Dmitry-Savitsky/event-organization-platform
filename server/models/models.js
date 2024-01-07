@@ -57,12 +57,12 @@ const ClientAddress = sequelize.define('ClientAddress', {
     PrimaryClientAddress: { type: DataTypes.INTEGER, allowNull: true },
   });
   
-const OrdersHasExecutor = sequelize.define('OrdersHasExecutor', {
-    // Assuming `idOrders` and `idExecutor` are both INTEGER
-    idOrdersHasExecutor: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    idOrders: { type: DataTypes.INTEGER, primaryKey: true },
-    idExecutor: { type: DataTypes.INTEGER, primaryKey: true },
-  });
+// const OrdersHasExecutor = sequelize.define('OrdersHasExecutor', {
+//     // Assuming `idOrders` and `idExecutor` are both INTEGER
+//     idOrdersHasExecutor: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+//     idOrders: { type: DataTypes.INTEGER, primaryKey: true },
+//     idExecutor: { type: DataTypes.INTEGER, primaryKey: true },
+//   });
   
   // Associations
 Client.hasMany(ClientAddress, { foreignKey: 'idClient' });
@@ -70,6 +70,9 @@ ClientAddress.belongsTo(Client, { foreignKey: 'idClient' });
   
 Executor.belongsTo(Company, { foreignKey: 'idCompany' });
 Company.hasMany(Executor, { foreignKey: 'idCompany' });
+
+Order.belongsTo(Executor, {foreignKey: 'idExecutor'});
+Executor.hasMany(Order, {foreignKey: 'idExecutor'});
   
 Service.belongsTo(Company, { foreignKey: 'idCompany' });
 Company.hasMany(Service, { foreignKey: 'idCompany' });
@@ -89,11 +92,11 @@ Order.hasMany(Review, { foreignKey: 'idOrders' });
 ClientAddress.belongsTo(Client, { foreignKey: 'idClient' });
 Client.hasMany(ClientAddress, { foreignKey: 'idClient' });
   
-OrdersHasExecutor.belongsTo(Order, { foreignKey: 'idOrders' });
-OrdersHasExecutor.belongsTo(Executor, { foreignKey: 'idExecutor' });
+// OrdersHasExecutor.belongsTo(Order, { foreignKey: 'idOrders' });
+// OrdersHasExecutor.belongsTo(Executor, { foreignKey: 'idExecutor' });
   
-Order.hasMany(OrdersHasExecutor, { foreignKey: 'idOrders' });
-Executor.hasMany(OrdersHasExecutor, { foreignKey: 'idExecutor' });
+// Order.hasMany(OrdersHasExecutor, { foreignKey: 'idOrders' });
+// Executor.hasMany(OrdersHasExecutor, { foreignKey: 'idExecutor' });
 
 module.exports = {
  Client,
@@ -103,6 +106,6 @@ module.exports = {
  Order,
  Review,
  ClientAddress,
- OrdersHasExecutor,
+ //OrdersHasExecutor,
  RegistrationData
 }

@@ -16,8 +16,8 @@ const ServicesPage = () => {
     };
   
     useEffect(() => {
-      // Fetch services when the component mounts
       getAllServices().then((data) => {
+        console.log('All Services:', data);
         setServices(data);
       });
     }, []);
@@ -34,14 +34,25 @@ const ServicesPage = () => {
   
     const searchData = (data) => {
       if (searchQuery) {
-        return data.filter((service) =>
-          service.ServiceName.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+        const lowercaseSearchQuery = searchQuery.toLowerCase();
+        const filteredData = data.filter((service) => {
+          const lowercaseServiceName = service.serviceName?.toLowerCase();
+          const includesSearchQuery = lowercaseServiceName?.includes(lowercaseSearchQuery);
+    
+          console.log('Search Query:', lowercaseSearchQuery);
+          console.log('Service Name:', lowercaseServiceName);
+          console.log('Includes:', includesSearchQuery);
+    
+          return includesSearchQuery;
+        });
+    
+        console.log('Filtered Data:', filteredData);
+        return filteredData;
       } else {
         return data;
       }
     };
-  
+    
     const sortedData = sortData(services);
     const searchedData = searchData(sortedData);
   
