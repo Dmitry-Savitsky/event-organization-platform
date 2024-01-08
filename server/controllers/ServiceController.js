@@ -6,17 +6,18 @@ const path = require(`path`)
 
 
 class ServiceController {
-    async create(req, res) {
+    
+    async create(req, res, next) {
         const { ServiceName, ServiceType, ServicePrice, idCompany } = req.body;
         const { img } = req.files
         let fileName = uuid.v4() + ".jpg"
         img.mv(path.resolve(__dirname, `..`, `static`, fileName))
 
         try {
-            const newService = await Service.create({ ServiceName, ServiceType, ServicePrice, img: fileName, idCompany }); //, img:fileName 
+            const newService = await Service.create({ ServiceName, ServiceType, ServicePrice, img: fileName, idCompany }); 
             return res.json({ Service: newService });
         } catch (error) {
-            next(ApiError.badRequest(error.message))
+            return res.json({ error });
         }
     }
 
@@ -58,6 +59,32 @@ class ServiceController {
             res.status(500).json({ message: 'Error retrieving service' });
         }
     }
+
+    async update(req, res, next) {
+        const { serviceId } = req.params; // Assuming you have the serviceId in the request parameters
+        const { ServiceName, ServiceType, ServicePrice} = req.body;
+    
+        try {
+            // Check if the service with the given ID exists
+            const existingService = await Service.findByPk(serviceId);
+            if (!existingService) {
+                return res.status(404).json({ error: 'Service not found' });
+            }
+    
+            // Update the service properties
+            existingService.ServiceName = ServiceName;
+            existingService.ServiceType = ServiceType;
+            existingService.ServicePrice = ServicePrice;
+    
+            // Save the changes
+            await existingService.save();
+    
+            return res.json({ Service: existingService });
+        } catch (error) {
+            next(ApiError.badRequest(error.message));
+        }
+    }
+    
 
 
     async delete(req, res) {

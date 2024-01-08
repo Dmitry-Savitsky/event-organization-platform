@@ -11,4 +11,6 @@ router.get('/:id', ServiceController.getOne);
 
 router.delete('/:id', ServiceController.delete);
 
+router.put('/update/:id', ServiceController.update);
+
 module.exports = router
