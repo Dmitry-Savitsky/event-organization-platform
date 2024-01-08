@@ -40,28 +40,46 @@ class ServiceController {
     }
 
     async getOne(req, res) {
-    try {
-        const { id } = req.params;
-        console.log("Received ID:", id); // Log the received ID for debugging
+        try {
+            const { id } = req.params;
+            console.log("Received ID:", id); // Log the received ID for debugging
 
-        const service = await Service.findByPk(id,  {
-            include: [{ model: Company, attributes: ['idCompany', 'CompanyName', 'CompanyPhone'] }]
-        });
+            const service = await Service.findByPk(id, {
+                include: [{ model: Company, attributes: ['idCompany', 'CompanyName', 'CompanyPhone'] }]
+            });
 
-        if (!service) {
-            res.status(404).json({ message: 'Service not found' });
-        } else {
-            res.json(service);
+            if (!service) {
+                res.status(404).json({ message: 'Service not found' });
+            } else {
+                res.json(service);
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Error retrieving service' });
         }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error retrieving service' });
     }
-}
 
 
     async delete(req, res) {
-
+        try {
+            const { id } = req.params;
+    
+            // Check if the service exists
+            const service = await Service.findByPk(id);
+            if (!service) {
+                return res.status(404).json({ message: 'Service not found' });
+            }
+    
+            // Delete the service
+            await Service.destroy({
+                where: { idService: id }
+            });
+    
+            res.status(204).json({ message: 'Service deleted successfully' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Error deleting service' });
+        }
     }
 }
 

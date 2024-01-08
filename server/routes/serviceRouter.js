@@ -9,6 +9,6 @@ router.get('/get', ServiceController.get);
 
 router.get('/:id', ServiceController.getOne);
 
-router.delete('/delete', ServiceController.delete);
+router.delete('/:id', ServiceController.delete);
 
 module.exports = router

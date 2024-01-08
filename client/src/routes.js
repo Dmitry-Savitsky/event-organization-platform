@@ -1,9 +1,10 @@
 import Company from "./pages/CompanyPage";
-import Client from "./pages/ClientPage";
+import ClientPage from "./pages/ClientPage";
 import Services from "./pages/Services";  // Use regular quotes here
 import ServicePage from "./pages/ServicePage";
 import Auth from "./pages/Auth";
 import Main from "./pages/MainPage";
+import FAQ from "./pages/FAQPage";
 
 import {
   CLIENT_ROUTE,
@@ -15,7 +16,6 @@ import {
   SERVICE_ROUTE,
   MAIN_ROUTE
 } from "./utils/consts";
-import FAQ from "./pages/FAQPage";
 
 export const authRoutes = [
   {
@@ -24,7 +24,7 @@ export const authRoutes = [
   },
   {
     path: CLIENT_ROUTE,
-    Component: Client,
+    Component: ClientPage,
   },
 ];
 
