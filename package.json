@@ -4,6 +4,7 @@
     "express-fileupload": "^1.4.3",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
+    "react-star-ratings": "^2.3.0",
     "uuid": "^9.0.1"
   }
 }

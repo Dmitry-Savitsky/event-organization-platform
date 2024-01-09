@@ -9,3 +9,8 @@ export const createReview = async (reviewData) => {
         throw error; // Propagate the error for handling in the calling code
     }
 };
+
+export const getAllReviews= async () => {
+    const { data } = await $host.get('api/review/get')
+    return data
+}

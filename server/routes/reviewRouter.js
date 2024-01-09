@@ -1,7 +1,7 @@
 const Router = require(`express`)
 const router = new Router
 
-const ReviewController = require("../controllers/reviewController");
+const ReviewController = require("../controllers/ReviewController");
 
 router.post('/create', ReviewController.create);
 

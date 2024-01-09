@@ -1,4 +1,4 @@
-const { Review } = require(`../models/models`)
+const { Review, Order, Client } = require(`../models/models`)
 const ApiError = require(`../error/ApiError`)
 
 class ReviewController {
@@ -21,7 +21,19 @@ class ReviewController {
     }
 
     async get(req, res) {
-
+        try {
+          const reviews = await Review.findAll({
+            include: [
+              { model: Client, attributes: ['idClient', 'ClientName', 'ClientPhone'] },
+              { model: Order, attributes: ['idOrder', 'OrderComment', 'OrderStart', 'OrderEnd', 'OrderAddress'] },
+            ],
+          });
+    
+          res.json(reviews);
+        } catch (error) {
+          console.error('Error fetching reviews:', error);
+          res.status(500).json({ error: 'Internal server error' });
+        }
     }
 
     async delete(req, res) {

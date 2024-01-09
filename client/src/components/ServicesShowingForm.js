@@ -5,7 +5,7 @@ import { getAllServices } from '../http/ServicesApi'; // Assuming the services f
 
 const ShowServicesModal = ({ show, onHide }) => {
   const [services, setServices] = useState([]);
-
+    
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -17,6 +17,7 @@ const ShowServicesModal = ({ show, onHide }) => {
     };
 
     fetchServices();
+
   }, []);
 
   return (
@@ -29,13 +30,15 @@ const ShowServicesModal = ({ show, onHide }) => {
           <Row>
             {services.map((service) => (
               <Col key={service.idService} md={4}>
-                <Card style={{ marginBottom: '15px' }}>
+                <Card style={{ marginBottom: '10px' }}>
                   <Card.Img variant="top" src={process.env.REACT_APP_API_URL + service.img}/>
                   <Card.Body>
                     <Card.Title>{service.serviceName}</Card.Title>
                     <Card.Text>
                       Type: {service.serviceType}
+                      
                       <br />
+
                       Price: ${service.servicePrice}
                     </Card.Text>
                   </Card.Body>
