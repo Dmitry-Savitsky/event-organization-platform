@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Container, Row, Tabs, Tab, Stack } from 'react-bootstrap';
 import ServiceForm from '../components/ServiceAddingForm';
 import { createService, deleteService } from '../http/ServicesApi';
+import ServiceModal from "../components/ServiceDeletingForm";
 
 const Company = () => {
 
@@ -22,7 +23,9 @@ const Company = () => {
     }
   };
 
-  
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
 
   return (
     <Container style={{ marginTop: 10, borderRadius: "10px" }}>
@@ -34,7 +37,7 @@ const Company = () => {
             </Button>
           </Row>
           <Row className='p-2'>
-            <Button variant="primary">
+            <Button variant="primary" onClick={handleShowModal}>
               Удалить услугу
             </Button>
           </Row>
@@ -87,6 +90,8 @@ const Company = () => {
         handleClose={handleCloseServiceForm}
         handleAddService={handleAddService}
       />
+
+      <ServiceModal show={showModal} handleClose={handleCloseModal} />
 
     </Container>
   );
