@@ -26,3 +26,8 @@ export const deleteService = async (id) => {
     const { data } = await $host.delete('api/service/' + id)
     return data
 }
+
+export const updateService = async (id, service) => {
+    const { data } = await $host.put('api/service/update/' + id, service)
+    return data
+}

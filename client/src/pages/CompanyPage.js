@@ -3,6 +3,8 @@ import { Button, Container, Row, Tabs, Tab, Stack } from 'react-bootstrap';
 import ServiceForm from '../components/ServiceAddingForm';
 import { createService, deleteService } from '../http/ServicesApi';
 import ServiceModal from "../components/ServiceDeletingForm";
+import ServiceUpdateModal from "../components/ServiceUpdatingForm";
+import ShowServicesModal from "../components/ServicesShowingForm";
 
 const Company = () => {
 
@@ -23,9 +25,18 @@ const Company = () => {
     }
   };
 
+
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+
+
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const handleShowUpdateModal = () => setShowUpdateModal(true);
+  const handleHideUpdateModal = () => setShowUpdateModal(false);
+
+
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <Container style={{ marginTop: 10, borderRadius: "10px" }}>
@@ -42,10 +53,10 @@ const Company = () => {
             </Button>
           </Row>
           <Stack direction="horizontal" className="p-2 justify-content-center" gap={2}>
-            <Button variant='primary'>
+            <Button variant='primary' onClick={handleShowUpdateModal}>
               Редактировать услугу
             </Button>
-            <Button variant='primary'>
+            <Button variant='primary'onClick={() => setModalShow(true)}>
               Посмотреть услуги
             </Button>
           </Stack>
@@ -92,6 +103,10 @@ const Company = () => {
       />
 
       <ServiceModal show={showModal} handleClose={handleCloseModal} />
+
+      <ServiceUpdateModal show={showUpdateModal} onHide={handleHideUpdateModal} />
+
+      <ShowServicesModal show={modalShow} onHide={() => setModalShow(false)} />
 
     </Container>
   );

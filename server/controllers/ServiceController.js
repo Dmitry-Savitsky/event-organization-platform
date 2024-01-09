@@ -61,20 +61,20 @@ class ServiceController {
     }
 
     async update(req, res, next) {
-        const { serviceId } = req.params; // Assuming you have the serviceId in the request parameters
-        const { ServiceName, ServiceType, ServicePrice} = req.body;
+        const { id } = req.params; // Assuming you have the serviceId in the request parameters
+        const { serviceName, serviceType, servicePrice} = req.body;
     
         try {
             // Check if the service with the given ID exists
-            const existingService = await Service.findByPk(serviceId);
+            const existingService = await Service.findByPk(id);
             if (!existingService) {
                 return res.status(404).json({ error: 'Service not found' });
             }
     
             // Update the service properties
-            existingService.ServiceName = ServiceName;
-            existingService.ServiceType = ServiceType;
-            existingService.ServicePrice = ServicePrice;
+            existingService.ServiceName = serviceName;
+            existingService.ServiceType = serviceType;
+            existingService.ServicePrice = servicePrice;
     
             // Save the changes
             await existingService.save();
