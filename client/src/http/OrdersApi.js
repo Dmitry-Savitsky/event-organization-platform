@@ -19,9 +19,13 @@ export const createOrder = async (orderData) => {
 
 
 export const setOrderExecutor = async (id, newExecutorId) => {
-    const { data } = await $host.put('api/order/updateExecutor' + id + '/' + newExecutorId)
-    return data
-}
+    console.log('Setting executor for order ID:', id);
+    console.log('New Executor ID:', newExecutorId);
+  
+    const { data } = await $host.put(`api/order/updateExecutor/${id}/${newExecutorId}`);
+    return data;
+  };
+  
 
 export const getAllOrders = async () => {
     const { data } = await $host.get('api/order/get')

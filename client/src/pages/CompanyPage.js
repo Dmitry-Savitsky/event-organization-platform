@@ -11,6 +11,7 @@ import ExecutorModal from '../components/ExecutorDeletingForm'; // Replace with 
 import ExecutorUpdateModal from '../components/ExecutorsUpdateForm';
 import ShowExecutorsModal from '../components/ExecutorsShowingForm';
 import CommentsTab from "../components/CommentsTab";
+import OrdersTab from "../components/OrderTab";
 
 
 const Company = () => {
@@ -139,7 +140,7 @@ const Company = () => {
         </Tab>
 
         <Tab eventKey="orders" title="Заказы">
-
+        <OrdersTab />
         </Tab>
 
         <Tab eventKey="comments" title="Комментарии">
