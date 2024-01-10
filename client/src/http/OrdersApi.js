@@ -24,7 +24,7 @@ export const setOrderExecutor = async (id, newExecutorId) => {
   
     const { data } = await $host.put(`api/order/updateExecutor/${id}/${newExecutorId}`);
     return data;
-  };
+}; 
   
 
 export const getAllOrders = async () => {

@@ -1,8 +1,27 @@
-import React from "react";
-import { Button, Container, ListGroup } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, ListGroup, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const MainPage = () => {
+  const listItems = [
+    "Гибкий выбор услуг",
+    "Эксклюзивные локации",
+    "Индивидуальные пакеты услуг",
+    "Комфортабельное размещение",
+  ];
+
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
+
+  const handleNextCard = () => {
+    setActiveCardIndex((prevIndex) => (prevIndex + 1) % listItems.length);
+  };
+
+  const handlePrevCard = () => {
+    setActiveCardIndex(
+      (prevIndex) => (prevIndex - 1 + listItems.length) % listItems.length
+    );
+  };
+
   return (
     <Container
       className="main-page-container mt-5 text-center rounded"
@@ -12,6 +31,8 @@ const MainPage = () => {
         padding: "20px",
       }}
     >
+      {/* Content Section */}
+      <div className="p-5 mb-4 rounded-3">
       <div className="p-5 mb-4 rounded-3">
         <div className="container-fluid py-5 text-white">
           <h1 className="display-5 fw-bold">
@@ -25,14 +46,23 @@ const MainPage = () => {
           </Button>
         </div>
       </div>
+      </div>
 
+      {/* Why Choose Us Section */}
       <h2>Почему выбирать нас?</h2>
-      <ListGroup className="text-left">
-        <ListGroup.Item>Гибкий выбор услуг</ListGroup.Item>
-        <ListGroup.Item>Эксклюзивные локации</ListGroup.Item>
-        <ListGroup.Item>Индивидуальные пакеты услуг</ListGroup.Item>
-        <ListGroup.Item>Комфортабельное размещение</ListGroup.Item>
-      </ListGroup>
+      <Card className="text-left">
+        <Card.Body>
+          <Card.Title>{listItems[activeCardIndex]}</Card.Title>
+        </Card.Body>
+      </Card>
+      <div className="mt-3">
+        <Button variant="light" onClick={handlePrevCard}>
+          &lt;
+        </Button>{" "}
+        <Button variant="light" onClick={handleNextCard}>
+          &gt;
+        </Button>
+      </div>
     </Container>
   );
 };
