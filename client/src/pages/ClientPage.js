@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { jwtDecode } from 'jwt-decode';
 import { getAllOrders } from "../http/OrdersApi";
 import ReviewForm from "../components/ReviewForm";
@@ -32,7 +32,7 @@ const ClientPage = () => {
 
   return (
     <div>
-      <h2>Your Orders</h2>
+      <Container className="mt-1">
       <ul>
         {orders.map(order => (
           <li
@@ -94,6 +94,7 @@ const ClientPage = () => {
           orderId={selectedOrder.idOrder}
         />
       )}
+      </Container>
     </div>
   );
 };

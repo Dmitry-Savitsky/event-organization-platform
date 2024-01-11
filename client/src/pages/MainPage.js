@@ -24,7 +24,7 @@ const MainPage = () => {
 
   return (
     <Container
-      className="main-page-container mt-5 text-center rounded"
+      className="main-page-container mt-1 text-center rounded"
       style={{
         background: "linear-gradient(to right, #343a40, #6c757d)",
         color: "#fff",
