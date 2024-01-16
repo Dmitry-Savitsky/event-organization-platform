@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useRef } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Dropdown } from 'react-bootstrap';
 import { Form, Button, Overlay } from 'react-bootstrap';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
@@ -12,7 +13,7 @@ import { LOGIN_ROUTE, SERVICES_ROUTE, REGISTRATION_ROUTE } from '../utils/consts
 import { toast, ToastContainer } from 'react-toastify';
 
 const Auth = () => {
-  
+
   const location = useLocation()
   const isLogin = location.pathname === LOGIN_ROUTE
   const { user } = useContext(Context)
@@ -22,11 +23,18 @@ const Auth = () => {
   const [user_login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('');
-  const status = 1;
+  //const status = 1;
   // const [status, setStatus] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const [show, setShow] = React.useState(false);
+
+  const [status, setStatus] = useState(1); // Default to client status
+
+  const handleStatusChange = (selectedStatus) => {
+    setStatus(selectedStatus);
+  };
+
 
   const click = async () => {
     console.log('Button clicked');
@@ -110,14 +118,20 @@ const Auth = () => {
                     onChange={e => setName(e.target.value)}
                     placeholder="Имя"
                   />
-                  {/* <Form.Control
-                    className="mb-2"
-                    id="status"
-                    type="nubmer?"
-                    value={status}
-                    onChange={e => setStatus(e.target.value)}
-                    placeholder="Статус"
-                  /> */}
+
+
+                  <Dropdown className="mb-2">
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      {status === 1 ? 'Client' : 'Company'}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={() => handleStatusChange(1)}>Client</Dropdown.Item>
+                      <Dropdown.Item onClick={() => handleStatusChange(2)}>Company</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+
+
                   <Form.Control
                     className="mb-2"
                     id="phone_number"

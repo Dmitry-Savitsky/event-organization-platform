@@ -53,6 +53,7 @@ const NavBar = observer(() => {
                                 Панель компании
                             </Button>
                         }
+                        {!isCompany &&
                         <Button
                             className="me-2"
                             style={{ color: "white" }}
@@ -61,6 +62,7 @@ const NavBar = observer(() => {
                         >
                             Профиль
                         </Button>
+                        }
                         <Button
                             className="me-2"
                             style={{ color: "white" }}

@@ -1,11 +1,17 @@
 // ServicesModal.js
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Card, Container, Row, Col } from 'react-bootstrap';
-import { getAllServices } from '../http/ServicesApi'; // Assuming the services file is in the same directory
+import { getAllServices } from '../http/ServicesApi';
+import generatePDF from '../utils/generatePdf';
 
 const ShowServicesModal = ({ show, onHide }) => {
+  
   const [services, setServices] = useState([]);
-    
+
+  const handleGeneratePDF = () => {
+    generatePDF(services);
+  };
+
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -31,12 +37,12 @@ const ShowServicesModal = ({ show, onHide }) => {
             {services.map((service) => (
               <Col key={service.idService} md={4}>
                 <Card style={{ marginBottom: '10px' }}>
-                  <Card.Img variant="top" src={process.env.REACT_APP_API_URL + service.img}/>
+                  <Card.Img variant="top" src={process.env.REACT_APP_API_URL + service.img} />
                   <Card.Body>
                     <Card.Title>{service.serviceName}</Card.Title>
                     <Card.Text>
                       Type: {service.serviceType}
-                      
+
                       <br />
 
                       Price: ${service.servicePrice}
@@ -49,6 +55,9 @@ const ShowServicesModal = ({ show, onHide }) => {
         </Container>
       </Modal.Body>
       <Modal.Footer>
+        <Button className='mt-2' onClick={handleGeneratePDF}>
+          Сформировать отчет
+        </Button>
         <Button variant="secondary" onClick={onHide}>
           Close
         </Button>
